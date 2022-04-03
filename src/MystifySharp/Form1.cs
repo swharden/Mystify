@@ -15,7 +15,7 @@ namespace MystifySharp
 
         private void SkglControl1_PaintSurface(object? sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
         {
-            ParticleField.Draw(e.Surface.Canvas, e.Info);
+            ParticleField.Draw(e.Surface.Canvas);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -35,7 +35,7 @@ public class Field
         Particles.ForEach(x => x.Advance(timeDelta, width, height));
     }
 
-    public void Draw(SKCanvas canvas, SKImageInfo info)
+    public void Draw(SKCanvas canvas)
     {
         canvas.Clear(SKColor.Parse("#003366"));
 

@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FFMpegCore" Version="4.7.0" />
 		<PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.88.0-preview.232" />
 	</ItemGroup>
 

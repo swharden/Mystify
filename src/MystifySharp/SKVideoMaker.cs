@@ -13,6 +13,7 @@ namespace MystifySharp
     {
         readonly int Width;
         readonly int Height;
+        private bool Proceed = false;
         public int CurrentFrame { get; private set; } = 0;
         public int TotalFrames { get; private set; } = 0;
 
@@ -25,30 +26,40 @@ namespace MystifySharp
             Height = height;
         }
 
+        public void Cancel()
+        {
+            Proceed = false;
+        }
+
         public async Task RenderAsync(int frameCount)
         {
-            var frames = CreateFrames(frameCount, width: 400, height: 300);
+            var frames = CreateFrames(frameCount);
             var videoFramesSource = new RawVideoPipeSource(frames) { FrameRate = 30 };
+            Proceed = true;
             await FFMpegArguments
                .FromPipeInput(videoFramesSource)
                .OutputToFile("output.webm", overwrite: true, options => options.WithVideoCodec("libvpx-vp9"))
                .ProcessAsynchronously();
+            Proceed = false;
         }
 
-        private IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
+        private IEnumerable<IVideoFrame> CreateFrames(int count)
         {
             TotalFrames = count;
 
             Model.Field field = new();
-            field.Reset(100, width, height);
+            field.Reset(100, Width, Height);
 
             for (int i = 0; i < count; i++)
             {
+                if (!Proceed)
+                    break;
+
                 CurrentFrame = i + 1;
                 RenderingNewFrame?.Invoke(this, EventArgs.Empty);
-                using SKBitmap bmp = new(width, height);
+                using SKBitmap bmp = new(Width, Height);
                 using SKCanvas canvas = new(bmp);
-                field.Advance(1, width, height);
+                field.Advance(1, Width, Height);
                 field.Draw(canvas);
                 using SKBitmapFrame frame = new(bmp);
                 yield return frame;

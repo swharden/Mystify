@@ -21,10 +21,17 @@ namespace MystifySharp
         {
             InitializeComponent();
             UpdateDurationLabel();
+            label3.Text = "Render job not started";
 
             VideoMaker = new SKVideoMaker(640, 460);
             VideoMaker.RenderingComplete += OnRenderingComplete;
             VideoMaker.RenderingNewFrame += OnRenderingNewFrame;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label3.Text = $"Rendering: Cancelling...";
+            VideoMaker.Cancel();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e) => UpdateDurationLabel();
@@ -38,42 +45,37 @@ namespace MystifySharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UpdateProgress(0, 0, "Starting rendering system...");
+            label3.Text = "Starting rendering system...";
             _ = VideoMaker.RenderAsync((int)numericUpDown1.Value);
-        }
-
-        static void SynchronizedInvoke(ISynchronizeInvoke sync, Action action)
-        {
-            if (sync.InvokeRequired)
-                _ = sync.Invoke(action, Array.Empty<object>());
-            else
-                action();
-        }
-
-        public void UpdateProgress(int frame, int frameMax, string message)
-        {
-            SynchronizedInvoke(progressBar1, delegate ()
-            {
-                progressBar1.Maximum = frameMax;
-                progressBar1.Value = frame;
-                progressBar1.Enabled = frameMax > 0;
-            });
-
-            SynchronizedInvoke(label3, delegate ()
-            {
-                label3.Text = message;
-            });
         }
 
         private void OnRenderingComplete(object? sender, EventArgs args)
         {
-            UpdateProgress(0, 0, "Rendering: Complete.");
+            progressBar1.Invoke(() =>
+            {
+                progressBar1.Value = 0;
+                progressBar1.Enabled = false;
+            });
+
+            label3.Invoke(() =>
+            {
+                label3.Text = $"Rendering: Complete";
+            });
         }
 
         private void OnRenderingNewFrame(object? sender, EventArgs args)
         {
-            string message = $"Rendering: Frame {VideoMaker.CurrentFrame} of {VideoMaker.TotalFrames}...";
-            UpdateProgress(VideoMaker.CurrentFrame, VideoMaker.TotalFrames, message);
+            progressBar1.Invoke(() =>
+            {
+                progressBar1.Maximum = VideoMaker.TotalFrames;
+                progressBar1.Value = VideoMaker.CurrentFrame;
+                progressBar1.Enabled = true;
+            });
+
+            label3.Invoke(() =>
+            {
+                label3.Text = $"Rendering: Frame {VideoMaker.CurrentFrame} of {VideoMaker.TotalFrames}...";
+            });
         }
     }
 }

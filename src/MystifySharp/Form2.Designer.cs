@@ -35,6 +35,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,11 +111,26 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // skglControl1
+            // 
+            this.skglControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.skglControl1.BackColor = System.Drawing.Color.Black;
+            this.skglControl1.Location = new System.Drawing.Point(13, 150);
+            this.skglControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.skglControl1.Name = "skglControl1";
+            this.skglControl1.Size = new System.Drawing.Size(446, 262);
+            this.skglControl1.TabIndex = 7;
+            this.skglControl1.VSync = true;
+            this.skglControl1.PaintSurface += new System.EventHandler<SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs>(this.skglControl1_PaintSurface);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 242);
+            this.ClientSize = new System.Drawing.Size(473, 426);
+            this.Controls.Add(this.skglControl1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.progressBar1);
@@ -140,5 +156,6 @@
         private ProgressBar progressBar1;
         private Label label3;
         private Button button2;
+        private SkiaSharp.Views.Desktop.SKGLControl skglControl1;
     }
 }

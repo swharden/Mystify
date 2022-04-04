@@ -3,24 +3,27 @@ using SkiaSharp;
 
 namespace MystifySharp;
 
-public class SKBitmapFrame : IVideoFrame, IDisposable
+public class SKBitmapFrame : IVideoFrame
 {
-    public int Width => Source.Width;
-    public int Height => Source.Height;
-    public string Format => "bgra";
-    private readonly SKBitmap Source;
+    public int Width { get; private set; }
+    public int Height { get; private set; }
+    public string Format { get; private set; }
+    private readonly byte[] Bytes;
 
     public SKBitmapFrame(SKBitmap bmp)
     {
-        if (bmp.ColorType != SKColorType.Bgra8888)
+        if (bmp.ColorType == SKColorType.Bgra8888)
+            Format = "bgra";
+        else
             throw new NotImplementedException("only 'bgra' color type is supported");
-        Source = bmp;
+
+        Width = bmp.Width;
+        Height = bmp.Height;
+        Bytes = bmp.Bytes;
     }
 
-    public void Dispose() => Source.Dispose();
-
-    public void Serialize(Stream stream) => stream.Write(Source.Bytes);
+    public void Serialize(Stream stream) => stream.Write(Bytes);
 
     public async Task SerializeAsync(Stream stream, CancellationToken token) =>
-        await stream.WriteAsync(Source.Bytes, token).ConfigureAwait(false);
+        await stream.WriteAsync(Bytes, token).ConfigureAwait(false);
 }

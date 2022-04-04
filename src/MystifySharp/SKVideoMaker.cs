@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace MystifySharp
 {
-    public class SKVideoMaker
+    public class SKVideoMaker : IDisposable
     {
-        readonly int Width;
-        readonly int Height;
         private bool Proceed = false;
         public int CurrentFrame { get; private set; } = 0;
         public int TotalFrames { get; private set; } = 0;
@@ -20,10 +18,19 @@ namespace MystifySharp
         public EventHandler? RenderingComplete;
         public EventHandler? RenderingNewFrame;
 
+        public readonly SKBitmap Bmp;
+        public readonly SKCanvas Canvas;
+
         public SKVideoMaker(int width, int height)
         {
-            Width = width;
-            Height = height;
+            Bmp = new(width, height);
+            Canvas = new(Bmp);
+        }
+
+        public void Dispose()
+        {
+            Canvas.Dispose();
+            Bmp.Dispose();
         }
 
         public void Cancel()
@@ -48,7 +55,10 @@ namespace MystifySharp
             TotalFrames = count;
 
             Model.Field field = new();
-            field.Reset(100, Width, Height);
+            field.Reset(100, Bmp.Width, Bmp.Height);
+
+            using SKFont timeCodeFont = new(SKTypeface.FromFamilyName("consolas"), size: 32);
+            using SKPaint timeCodePaint = new(timeCodeFont) { Color = SKColors.Yellow, TextAlign = SKTextAlign.Left, IsAntialias = true };
 
             for (int i = 0; i < count; i++)
             {
@@ -57,12 +67,10 @@ namespace MystifySharp
 
                 CurrentFrame = i + 1;
                 RenderingNewFrame?.Invoke(this, EventArgs.Empty);
-                using SKBitmap bmp = new(Width, Height);
-                using SKCanvas canvas = new(bmp);
-                field.Advance(1, Width, Height);
-                field.Draw(canvas);
-                using SKBitmapFrame frame = new(bmp);
-                yield return frame;
+                field.Advance(1, Bmp.Width, Bmp.Height);
+                field.Draw(Canvas);
+                Canvas.DrawText($"Frame {i:N0}", 10, 35, timeCodePaint);
+                yield return new SKBitmapFrame(Bmp);
             }
 
             RenderingComplete?.Invoke(this, EventArgs.Empty);

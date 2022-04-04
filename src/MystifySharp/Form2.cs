@@ -76,6 +76,14 @@ namespace MystifySharp
             {
                 label3.Text = $"Rendering: Frame {VideoMaker.CurrentFrame} of {VideoMaker.TotalFrames}...";
             });
+
+            skglControl1.Invalidate();
+        }
+
+        private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
+        {
+            // may be partially-drawn canvas
+            e.Surface.Canvas.DrawBitmap(VideoMaker.Bmp, 0, 0);
         }
     }
 }

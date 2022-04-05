@@ -22,22 +22,15 @@ internal class Field
         Random rand = new();
         for (int i = 0; i < wireCount; i++)
         {
-            PolyWire wire = new(4, rand);
-            wire.ColorChangeSpeed = .5 + .2 * rand.NextDouble();
-            wire.Hue = 255f / wireCount * i;
+            PolyWire wire = new(4, rand)
+            {
+                ColorChangeSpeed = (.5 + .2 * rand.NextDouble()) * 1,
+                MaxSnapshots = 7,
+                Hue = 255f / wireCount * i,
+            };
             wire.RandomizeCorners(width, height);
             Wires.Add(wire);
         }
-    }
-
-    private static SKColor[] RandomRainbowColors(Random rand, int count)
-    {
-        float spacing = 255 / count;
-        float offset = (float)rand.NextDouble() * spacing;
-        return Enumerable
-            .Range(0, count)
-            .Select(i => SKColor.FromHsv(offset + spacing * i, 255, 255))
-            .ToArray();
     }
 
     public void Resize(float width, float height)

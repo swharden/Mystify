@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace MystifySharp
 {
-    public partial class Form3 : Form
+    public partial class ViewForm : Form
     {
         readonly Model.Field Field;
 
-        public Form3()
+        public ViewForm()
         {
             InitializeComponent();
             Field = new(skglControl1.Width, skglControl1.Height);

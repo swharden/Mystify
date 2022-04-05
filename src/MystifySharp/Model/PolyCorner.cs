@@ -11,7 +11,7 @@ public struct PolyCorner
 
     public static float RandomPositiveVelocity(Random rand)
     {
-        return (float)rand.NextDouble() * 10 + 2;
+        return (float)rand.NextDouble() * 15 + 2;
     }
 
     public static float RandomVelocity(Random rand)

@@ -7,7 +7,7 @@ namespace MystifySharp.Model
     {
         public readonly PolyCorner[] Corners;
         public readonly Queue<PolyWireSnapshot> Snapshots = new();
-        public int MaxSnapshots = 7;
+        public int MaxSnapshots = 5;
         public double Hue;
         public double ColorChangeSpeed = .001f;
         public readonly Random Rand;

@@ -1,6 +1,6 @@
 ﻿namespace MystifySharp
 {
-    partial class ViewForm
+    partial class MenuForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // skglControl1
+            // button1
             // 
-            this.skglControl1.BackColor = System.Drawing.Color.Black;
-            this.skglControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skglControl1.Location = new System.Drawing.Point(0, 0);
-            this.skglControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.skglControl1.Name = "skglControl1";
-            this.skglControl1.Size = new System.Drawing.Size(680, 426);
-            this.skglControl1.TabIndex = 0;
-            this.skglControl1.VSync = true;
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(188, 57);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Mystify Viewer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // timer1
+            // button2
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 40;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.button2.Location = new System.Drawing.Point(206, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(188, 57);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Mystify Video Creator";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // ViewForm
+            // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 426);
-            this.Controls.Add(this.skglControl1);
-            this.Name = "ViewForm";
+            this.ClientSize = new System.Drawing.Size(405, 82);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mystify";
             this.ResumeLayout(false);
@@ -65,7 +68,7 @@
 
         #endregion
 
-        private SkiaSharp.Views.Desktop.SKGLControl skglControl1;
-        private System.Windows.Forms.Timer timer1;
+        private Button button1;
+        private Button button2;
     }
 }

@@ -1,55 +1,59 @@
 ﻿using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MystifySharp.Model;
 
-public class Field
+internal class Field
 {
-    readonly List<Particle> Particles = new();
+    private readonly List<PolyWire> Wires = new();
 
-    public void Reset(int count, float width, float height)
+    public float Width { get; private set; }
+    public float Height { get; private set; }
+    public SKColor BackgroundColor = SKColors.Black;
+    public float Speed = 1.0f;
+
+    public Field(float width, float height, int wireCount = 2)
     {
+        Resize(width, height);
         Random rand = new();
-        Particles.Clear();
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < wireCount; i++)
         {
-            Particle p = new()
-            {
-                X = (float)rand.NextDouble() * width,
-                Y = (float)rand.NextDouble() * height,
-                VelocityX = (float)(rand.NextDouble() - .5) * 5 + 1,
-                VelocityY = (float)(rand.NextDouble() - .5) * 5 + 1,
-                Radius = (float)rand.NextDouble() * 10 + 3,
-                Color = new SKColor(
-                    red: (byte)rand.Next(255),
-                    green: (byte)rand.Next(255),
-                    blue: (byte)rand.Next(255),
-                    alpha: 255),
-            };
-
-            Particles.Add(p);
+            PolyWire wire = new(4, rand);
+            wire.ColorChangeSpeed = .5 + .2 * rand.NextDouble();
+            wire.Hue = 255f / wireCount * i;
+            wire.RandomizeCorners(width, height);
+            Wires.Add(wire);
         }
     }
 
-    public void Advance(float timeDelta, int width, int height)
+    private static SKColor[] RandomRainbowColors(Random rand, int count)
     {
-        Particles.ForEach(x => x.Advance(timeDelta, width, height));
+        float spacing = 255 / count;
+        float offset = (float)rand.NextDouble() * spacing;
+        return Enumerable
+            .Range(0, count)
+            .Select(i => SKColor.FromHsv(offset + spacing * i, 255, 255))
+            .ToArray();
+    }
+
+    public void Resize(float width, float height)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public void Advance()
+    {
+        Wires.ForEach(x => x.Advance(Speed, Width, Height));
     }
 
     public void Draw(SKCanvas canvas)
     {
-        canvas.Clear(SKColor.Parse("#003366"));
-
-        using SKPaint paint = new()
-        {
-            Style = SKPaintStyle.Fill,
-            IsAntialias = true,
-        };
-
-        foreach (Particle particle in Particles)
-        {
-            paint.Color = particle.Color;
-            SKPoint pt = new(particle.X, particle.Y);
-            canvas.DrawCircle(pt, particle.Radius, paint);
-        }
+        canvas.Clear(BackgroundColor);
+        Wires.ForEach(x => x.Draw(canvas));
     }
 }

@@ -18,6 +18,7 @@ namespace MystifySharp
 
         private bool Abort = false;
         public readonly IFrameGenerator Model;
+        private readonly System.Diagnostics.Stopwatch Stopwatch = new();
 
         public SKVideoMaker(IFrameGenerator model, int frameCount, int fps)
         {
@@ -52,6 +53,7 @@ namespace MystifySharp
 
         private async Task RenderAsync(string filename, string codec)
         {
+            Stopwatch.Restart();
             Abort = false;
             Status = $"starting renderer";
             System.Diagnostics.Debug.WriteLine(Status);
@@ -61,7 +63,7 @@ namespace MystifySharp
                .OutputToFile(filename, overwrite: true, options => options
                    .WithVideoCodec(codec))
                .ProcessAsynchronously();
-            Status = $"render complete";
+            Status = $"render completed in {Stopwatch.Elapsed}";
         }
 
         public void Cancel() => Abort = true;

@@ -15,14 +15,18 @@ internal class Field
     public float Height { get; private set; }
     public SKColor BackgroundColor = SKColors.Black;
     public float Speed = 1.0f;
+    public int History { set { Wires.ForEach(x => x.MaxSnapshots = value); } }
+    public double ColorChangeSpeed { set { Wires.ForEach(x => x.ColorChangeSpeed = value); } }
+    public bool AntiAlias { set { Wires.ForEach(x => x.AntiAlias = value); } }
+    public bool Fade { set { Wires.ForEach(x => x.Fade = value); } }
 
-    public Field(float width, float height, int wireCount = 2)
+    public Field(float width, float height, int wireCount = 2, int cornerCount = 4)
     {
         Resize(width, height);
         Random rand = new();
         for (int i = 0; i < wireCount; i++)
         {
-            PolyWire wire = new(4, rand)
+            PolyWire wire = new(cornerCount, rand)
             {
                 ColorChangeSpeed = (.5 + .2 * rand.NextDouble()) * 1,
                 MaxSnapshots = 7,

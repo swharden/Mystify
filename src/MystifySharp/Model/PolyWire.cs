@@ -6,10 +6,12 @@ namespace MystifySharp.Model
     public class PolyWire
     {
         public readonly PolyCorner[] Corners;
-        public readonly Queue<PolyWireSnapshot> Snapshots = new();
+        public readonly List<PolyWireSnapshot> Snapshots = new();
         public int MaxSnapshots = 5;
         public double Hue;
         public double ColorChangeSpeed = .001f;
+        public bool AntiAlias = true;
+        public bool Fade = false;
         public readonly Random Rand;
 
         public PolyWire(int cornerCount, Random rand)
@@ -54,9 +56,19 @@ namespace MystifySharp.Model
                 Color = RainbowColor(Hue),
             };
 
-            Snapshots.Enqueue(snapshot);
+            Snapshots.Add(snapshot);
             while (Snapshots.Count > MaxSnapshots)
-                Snapshots.Dequeue();
+                Snapshots.RemoveAt(0);
+        }
+
+        public void Draw(SKCanvas canvas)
+        {
+            for (int i = 0; i < Snapshots.Count; i++)
+            {
+                float frac = (float)(i + 1) / Snapshots.Count;
+                byte alpha = (byte)(frac * 255);
+                Snapshots[i].Draw(canvas, AntiAlias, alpha);
+            }
         }
 
         public static SKColor RainbowColor(double h)
@@ -128,13 +140,6 @@ namespace MystifySharp.Model
                 red: Convert.ToByte(r * 255.0f),
                 green: Convert.ToByte(g * 255.0f),
                 blue: Convert.ToByte(b * 255.0f));
-        }
-
-
-        public void Draw(SKCanvas canvas)
-        {
-            foreach (PolyWireSnapshot snapshot in Snapshots)
-                snapshot.Draw(canvas);
         }
     }
 }

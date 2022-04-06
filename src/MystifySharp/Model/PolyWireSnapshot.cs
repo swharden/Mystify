@@ -7,12 +7,12 @@ public struct PolyWireSnapshot
     public SKColor Color { get; init; }
     public SKPoint[] Points { get; init; }
 
-    public void Draw(SKCanvas canvas)
+    public void Draw(SKCanvas canvas, bool antiAlias, byte alpha)
     {
         SKPaint paint = new()
         {
-            Color = Color,
-            IsAntialias = true,
+            Color = Color.WithAlpha(alpha),
+            IsAntialias = antiAlias,
             StrokeWidth = 1,
             Style = SKPaintStyle.Stroke,
         };

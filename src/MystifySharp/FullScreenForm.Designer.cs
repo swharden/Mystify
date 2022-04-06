@@ -1,6 +1,6 @@
 ﻿namespace MystifySharp
 {
-    partial class ViewForm
+    partial class FullScreenForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,25 +40,26 @@
             this.skglControl1.Location = new System.Drawing.Point(0, 0);
             this.skglControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.skglControl1.Name = "skglControl1";
-            this.skglControl1.Size = new System.Drawing.Size(680, 426);
+            this.skglControl1.Size = new System.Drawing.Size(800, 450);
             this.skglControl1.TabIndex = 0;
             this.skglControl1.VSync = true;
+            this.skglControl1.PaintSurface += new System.EventHandler<SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs>(this.skglControl1_PaintSurface);
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 40;
+            this.timer1.Interval = 35;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // ViewForm
+            // AdvancedFormFullScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 426);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.skglControl1);
-            this.Name = "ViewForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mystify";
+            this.Name = "AdvancedFormFullScreen";
+            this.Text = "Mystify Full Screen";
+            this.Load += new System.EventHandler(this.AdvancedFormFullScreen_Load);
             this.ResumeLayout(false);
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace MystifySharp
 {
-    partial class AdvancedForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.

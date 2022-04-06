@@ -12,11 +12,11 @@ using SkiaSharp.Views.Desktop;
 
 namespace MystifySharp
 {
-    public partial class AdvancedForm : Form
+    public partial class MainForm : Form
     {
         Field Field = new(10, 10);
 
-        public AdvancedForm()
+        public MainForm()
         {
             InitializeComponent();
             this.Width = 800;
@@ -74,7 +74,7 @@ namespace MystifySharp
         private void btnFullScreen_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            using AdvancedFormFullScreen form = new(Field);
+            using FullScreenForm form = new(Field);
             form.ShowDialog();
             timer1.Start();
         }
@@ -82,7 +82,7 @@ namespace MystifySharp
         private void btnVideo_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            using AdvancedRenderForm form = new(Field);
+            using RenderForm form = new(Field);
             form.ShowDialog();
             timer1.Start();
         }

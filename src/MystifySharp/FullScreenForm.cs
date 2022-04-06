@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace MystifySharp
 {
-    public partial class AdvancedFormFullScreen : Form
+    public partial class FullScreenForm : Form
     {
         readonly Model.Field Field;
 
-        public AdvancedFormFullScreen(Model.Field field)
+        public FullScreenForm(Model.Field field)
         {
             InitializeComponent();
             Field = field;

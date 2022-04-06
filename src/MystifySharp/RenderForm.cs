@@ -12,41 +12,38 @@ namespace MystifySharp
 {
     public partial class RenderForm : Form
     {
-        SKVideoMaker? VideoMaker;
+        readonly Model.Field Field;
+        SKVideoMaker? Maker = null;
 
-        public RenderForm()
+        public RenderForm(Model.Field field)
         {
             InitializeComponent();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblStatus.Text = VideoMaker?.Status;
-            progressBar1.Maximum = VideoMaker?.FrameCount ?? 1;
-            progressBar1.Value = VideoMaker?.CurrentFrame ?? 0;
-            skglControl1.Invalidate();
-        }
-
-        private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
-        {
-            if (VideoMaker is not null)
-                e.Surface.Canvas.DrawBitmap(VideoMaker.Model.Bitmap, 0, 0);
+            Field = field;
         }
 
         private void btnRender_Click(object sender, EventArgs e)
         {
-            lblStatus.Text = "preparing to render";
+            lblStatus.Text = "starting renderer...";
             Application.DoEvents();
-            IFrameGenerator gen = new Model.FieldFrameGenerator((int)nudWidth.Value, (int)nudHeight.Value);
-            int fps = (int)nudFps.Value;
-            int frameCount = fps * (int)nudLengthSec.Value;
-            VideoMaker = new SKVideoMaker(gen, frameCount, fps);
-            VideoMaker?.RenderAsync_X264(tbFilename.Text);
+            IFrameGenerator generator = new Model.FieldFrameGenerator(Field);
+            Maker = new(generator, (int)(nudFps.Value * nudSeconds.Value), (int)nudFps.Value);
+            _ = Maker.RenderAsync_X264("mystify.mp4");
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnStop_Click(object sender, EventArgs e)
         {
-            VideoMaker?.Cancel();
+            if (Maker is not null)
+                Maker.Cancel();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Maker is null)
+                return;
+
+            lblStatus.Text = Maker.Status;
+            progressBar1.Maximum = Maker.FrameCount;
+            progressBar1.Value = Maker.CurrentFrame;
         }
     }
 }

@@ -43,6 +43,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.rbWebM = new System.Windows.Forms.RadioButton();
+            this.rbX264 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeconds)).BeginInit();
@@ -176,7 +178,7 @@
             // 
             // btnRender
             // 
-            this.btnRender.Location = new System.Drawing.Point(308, 9);
+            this.btnRender.Location = new System.Drawing.Point(390, 9);
             this.btnRender.Name = "btnRender";
             this.btnRender.Size = new System.Drawing.Size(75, 41);
             this.btnRender.TabIndex = 8;
@@ -186,7 +188,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(389, 9);
+            this.btnStop.Location = new System.Drawing.Point(471, 9);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 41);
             this.btnStop.TabIndex = 9;
@@ -196,9 +198,11 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(12, 56);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(452, 23);
+            this.progressBar1.Size = new System.Drawing.Size(534, 23);
             this.progressBar1.TabIndex = 10;
             // 
             // statusStrip1
@@ -207,7 +211,7 @@
             this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 91);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(474, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(558, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -223,11 +227,35 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // rbWebM
+            // 
+            this.rbWebM.AutoSize = true;
+            this.rbWebM.Location = new System.Drawing.Point(308, 31);
+            this.rbWebM.Name = "rbWebM";
+            this.rbWebM.Size = new System.Drawing.Size(60, 19);
+            this.rbWebM.TabIndex = 12;
+            this.rbWebM.Text = "WebM";
+            this.rbWebM.UseVisualStyleBackColor = true;
+            // 
+            // rbX264
+            // 
+            this.rbX264.AutoSize = true;
+            this.rbX264.Checked = true;
+            this.rbX264.Location = new System.Drawing.Point(308, 7);
+            this.rbX264.Name = "rbX264";
+            this.rbX264.Size = new System.Drawing.Size(76, 19);
+            this.rbX264.TabIndex = 13;
+            this.rbX264.TabStop = true;
+            this.rbX264.Text = "x264 MP4";
+            this.rbX264.UseVisualStyleBackColor = true;
+            // 
             // RenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 113);
+            this.ClientSize = new System.Drawing.Size(558, 113);
+            this.Controls.Add(this.rbX264);
+            this.Controls.Add(this.rbWebM);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnStop);
@@ -270,5 +298,7 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.Timer timer1;
+        private RadioButton rbWebM;
+        private RadioButton rbX264;
     }
 }

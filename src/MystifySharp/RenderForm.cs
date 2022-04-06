@@ -27,7 +27,14 @@ namespace MystifySharp
             Application.DoEvents();
             IFrameGenerator generator = new Model.FieldFrameGenerator(Field);
             Maker = new(generator, (int)(nudFps.Value * nudSeconds.Value), (int)nudFps.Value);
-            _ = Maker.RenderAsync_X264("mystify.mp4");
+
+            int linuxTime = (int)((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds);
+
+            if (rbWebM.Checked)
+                _ = Maker.RenderAsync_WebM($"mystify-{linuxTime}.webm");
+            else if (rbX264.Checked)
+                _ = Maker.RenderAsync_X264($"mystify-{linuxTime}.mp4");
+            else throw new NotImplementedException("unknown render format");
         }
 
         private void btnStop_Click(object sender, EventArgs e)

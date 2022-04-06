@@ -74,8 +74,16 @@ namespace MystifySharp
         private void btnFullScreen_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            using AdvancedFormFullScreen fs = new(Field);
-            fs.ShowDialog();
+            using AdvancedFormFullScreen form = new(Field);
+            form.ShowDialog();
+            timer1.Start();
+        }
+
+        private void btnVideo_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            using AdvancedRenderForm form = new(Field);
+            form.ShowDialog();
             timer1.Start();
         }
     }

@@ -8,6 +8,13 @@ public class FieldFrameGenerator : IFrameGenerator
     private readonly Field Field;
     private readonly SKCanvas Canvas;
 
+    public FieldFrameGenerator(Field field)
+    {
+        Field = field;
+        Bitmap = new SKBitmap((int)field.Width, (int)field.Height);
+        Canvas = new SKCanvas(Bitmap);
+    }
+
     public FieldFrameGenerator(int width, int height)
     {
         Field = new Field(width, height);

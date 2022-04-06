@@ -46,6 +46,7 @@
             this.cbFade = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnVideo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudPolygonCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCornerCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColorStep)).BeginInit();
@@ -241,14 +242,14 @@
             this.skglControl1.Location = new System.Drawing.Point(12, 56);
             this.skglControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.skglControl1.Name = "skglControl1";
-            this.skglControl1.Size = new System.Drawing.Size(662, 322);
+            this.skglControl1.Size = new System.Drawing.Size(866, 456);
             this.skglControl1.TabIndex = 18;
             this.skglControl1.VSync = true;
             // 
             // btnFullScreen
             // 
             this.btnFullScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFullScreen.Location = new System.Drawing.Point(600, 12);
+            this.btnFullScreen.Location = new System.Drawing.Point(804, 12);
             this.btnFullScreen.Name = "btnFullScreen";
             this.btnFullScreen.Size = new System.Drawing.Size(75, 36);
             this.btnFullScreen.TabIndex = 19;
@@ -277,9 +278,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 391);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 525);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(687, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(891, 22);
             this.statusStrip1.TabIndex = 21;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -289,11 +290,22 @@
             this.lblStatus.Size = new System.Drawing.Size(118, 17);
             this.lblStatus.Text = "toolStripStatusLabel1";
             // 
+            // btnVideo
+            // 
+            this.btnVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVideo.Location = new System.Drawing.Point(723, 12);
+            this.btnVideo.Name = "btnVideo";
+            this.btnVideo.Size = new System.Drawing.Size(75, 36);
+            this.btnVideo.TabIndex = 22;
+            this.btnVideo.Text = "Video";
+            this.btnVideo.UseVisualStyleBackColor = true;
+            this.btnVideo.Click += new System.EventHandler(this.btnVideo_Click);
+            // 
             // AdvancedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 413);
+            this.ClientSize = new System.Drawing.Size(891, 547);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.skglControl1);
             this.Controls.Add(this.label5);
@@ -301,6 +313,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnVideo);
             this.Controls.Add(this.btnFullScreen);
             this.Controls.Add(this.cbFade);
             this.Controls.Add(this.cbAntiAlias);
@@ -342,5 +355,6 @@
         private CheckBox cbFade;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblStatus;
+        private Button btnVideo;
     }
 }

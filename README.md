@@ -6,12 +6,11 @@
 
 ![](dev/mystify.gif)
 
+![](dev/mystify-advanced.jpg)
+
 </div>
 
-### Watch on YouTube
+### YouTube
 
-<div align="center">
 
 [![](https://img.youtube.com/vi/lGShVB6ijMY/0.jpg)](https://www.youtube.com/watch?v=lGShVB6ijMY)
-
-</div>

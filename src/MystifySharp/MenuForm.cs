@@ -26,5 +26,10 @@ namespace MystifySharp
         {
             new ViewForm().ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new AdvancedForm().ShowDialog();
+        }
     }
 }

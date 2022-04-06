@@ -97,11 +97,21 @@
             // nudSeconds
             // 
             this.nudSeconds.Location = new System.Drawing.Point(234, 27);
+            this.nudSeconds.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
+            this.nudSeconds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudSeconds.Name = "nudSeconds";
             this.nudSeconds.Size = new System.Drawing.Size(68, 23);
             this.nudSeconds.TabIndex = 2;
             this.nudSeconds.Value = new decimal(new int[] {
-            30,
+            600,
             0,
             0,
             0});
@@ -213,7 +223,7 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // AdvancedRenderForm
+            // RenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -230,7 +240,7 @@
             this.Controls.Add(this.nudFps);
             this.Controls.Add(this.nudHeight);
             this.Controls.Add(this.nudWidth);
-            this.Name = "AdvancedRenderForm";
+            this.Name = "RenderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdvancedRenderForm";
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).EndInit();

@@ -30,7 +30,7 @@ public class Field
             {
                 ColorChangeSpeed = (.5 + .2 * rand.NextDouble()) * 1,
                 MaxSnapshots = 7,
-                Hue = 255f / wireCount * i,
+                Hue = (double)i / wireCount,
             };
             wire.RandomizeCorners(width, height);
             Wires.Add(wire);
@@ -43,7 +43,7 @@ public class Field
         Height = height;
         if (reset)
         {
-            foreach(PolyWire wire in Wires)
+            foreach (PolyWire wire in Wires)
             {
                 wire.RandomizeCorners(width, height);
             }

@@ -40,6 +40,8 @@ namespace MystifySharp.Model
                     Location = location,
                     Velocity = velocity
                 };
+
+                Snapshots.Clear();
             }
         }
 
@@ -66,7 +68,7 @@ namespace MystifySharp.Model
             for (int i = 0; i < Snapshots.Count; i++)
             {
                 float frac = (float)(i + 1) / Snapshots.Count;
-                byte alpha = (byte)(frac * 255);
+                byte alpha = (byte)(Fade ? frac * 255 : 255);
                 Snapshots[i].Draw(canvas, AntiAlias, alpha);
             }
         }

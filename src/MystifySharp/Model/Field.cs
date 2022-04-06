@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MystifySharp.Model;
 
-internal class Field
+public class Field
 {
     private readonly List<PolyWire> Wires = new();
 
@@ -37,10 +37,17 @@ internal class Field
         }
     }
 
-    public void Resize(float width, float height)
+    public void Resize(float width, float height, bool reset = false)
     {
         Width = width;
         Height = height;
+        if (reset)
+        {
+            foreach(PolyWire wire in Wires)
+            {
+                wire.RandomizeCorners(width, height);
+            }
+        }
     }
 
     public void Advance()

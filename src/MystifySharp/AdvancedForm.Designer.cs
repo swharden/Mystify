@@ -43,12 +43,15 @@
             this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             this.btnFullScreen = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnSmooth = new System.Windows.Forms.CheckBox();
+            this.cbFade = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nudPolygonCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCornerCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColorStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHistory)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // nudPolygonCount
@@ -238,7 +241,7 @@
             this.skglControl1.Location = new System.Drawing.Point(12, 56);
             this.skglControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.skglControl1.Name = "skglControl1";
-            this.skglControl1.Size = new System.Drawing.Size(662, 345);
+            this.skglControl1.Size = new System.Drawing.Size(662, 322);
             this.skglControl1.TabIndex = 18;
             this.skglControl1.VSync = true;
             // 
@@ -251,6 +254,7 @@
             this.btnFullScreen.TabIndex = 19;
             this.btnFullScreen.Text = "Full Screen";
             this.btnFullScreen.UseVisualStyleBackColor = true;
+            this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
             // timer1
             // 
@@ -258,22 +262,39 @@
             this.timer1.Interval = 35;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnSmooth
+            // cbFade
             // 
-            this.btnSmooth.AutoSize = true;
-            this.btnSmooth.Location = new System.Drawing.Point(451, 28);
-            this.btnSmooth.Name = "btnSmooth";
-            this.btnSmooth.Size = new System.Drawing.Size(51, 19);
-            this.btnSmooth.TabIndex = 20;
-            this.btnSmooth.Text = "Fade";
-            this.btnSmooth.UseVisualStyleBackColor = true;
-            this.btnSmooth.CheckedChanged += new System.EventHandler(this.btnSmooth_CheckedChanged);
+            this.cbFade.AutoSize = true;
+            this.cbFade.Location = new System.Drawing.Point(451, 28);
+            this.cbFade.Name = "cbFade";
+            this.cbFade.Size = new System.Drawing.Size(51, 19);
+            this.cbFade.TabIndex = 20;
+            this.cbFade.Text = "Fade";
+            this.cbFade.UseVisualStyleBackColor = true;
+            this.cbFade.CheckedChanged += new System.EventHandler(this.cbFade_CheckedChanged);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 391);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(687, 22);
+            this.statusStrip1.TabIndex = 21;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(118, 17);
+            this.lblStatus.Text = "toolStripStatusLabel1";
             // 
             // AdvancedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 413);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.skglControl1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -281,7 +302,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnFullScreen);
-            this.Controls.Add(this.btnSmooth);
+            this.Controls.Add(this.cbFade);
             this.Controls.Add(this.cbAntiAlias);
             this.Controls.Add(this.nudSpeed);
             this.Controls.Add(this.nudHistory);
@@ -296,6 +317,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudColorStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHistory)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,6 +339,8 @@
         private SkiaSharp.Views.Desktop.SKGLControl skglControl1;
         private Button btnFullScreen;
         private System.Windows.Forms.Timer timer1;
-        private CheckBox btnSmooth;
+        private CheckBox cbFade;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel lblStatus;
     }
 }

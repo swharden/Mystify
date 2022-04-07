@@ -25,6 +25,7 @@ namespace MystifySharp
         {
             lblStatus.Text = "starting renderer...";
             Application.DoEvents();
+            Field.Resize((int)nudWidth.Value, (int)nudHeight.Value);
             IFrameGenerator generator = new Model.FieldFrameGenerator(Field);
             Maker = new(generator, (int)(nudFps.Value * nudSeconds.Value), (int)nudFps.Value);
 
